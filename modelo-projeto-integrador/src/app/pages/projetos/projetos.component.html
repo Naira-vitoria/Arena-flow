@@ -1,0 +1,132 @@
+<p class="caminho">Navegação / Campeonatos</p>
+
+<div class="cabecalho-pagina">
+  <p class="sobretitulo">CADASTRO E ORGANIZAÇÃO</p>
+  <h1>Campeonatos</h1>
+  <p>Cadastre um campeonato para começar a organizar as equipes e as etapas da competição.</p>
+</div>
+
+<mat-card appearance="outlined" class="formulario-card">
+  <mat-card-content>
+    <div class="titulo-secao">
+      <div>
+        <span class="etiqueta">DADOS DO EVENTO</span>
+        <h2>{{ idEmEdicao === null ? 'Cadastrar campeonato' : 'Editar campeonato' }}</h2>
+        <p>Preencha as informações abaixo. Os campos com * são obrigatórios.</p>
+      </div>
+    </div>
+
+    <form #formulario="ngForm" (ngSubmit)="salvar(formulario)" class="formulario">
+      <div class="grade-formulario">
+        <mat-form-field appearance="outline" class="campo campo-largo">
+          <mat-label>Nome do campeonato *</mat-label>
+          <input matInput name="nome" [(ngModel)]="campeonato.nome" required maxlength="100" placeholder="Ex.: Copa Arena de Futebol">
+          <mat-error>Informe o nome do campeonato.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Modalidade *</mat-label>
+          <mat-select name="modalidade" [(ngModel)]="campeonato.modalidade" required>
+            <mat-option value="Futebol">Futebol</mat-option>
+            <mat-option value="Futsal">Futsal</mat-option>
+            <mat-option value="Vôlei">Vôlei</mat-option>
+            <mat-option value="Basquete">Basquete</mat-option>
+            <mat-option value="Handebol">Handebol</mat-option>
+            <mat-option value="Outra">Outra</mat-option>
+          </mat-select>
+          <mat-error>Selecione uma modalidade.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Local *</mat-label>
+          <input matInput name="local" [(ngModel)]="campeonato.local" required maxlength="120" placeholder="Ex.: Ginásio Municipal">
+          <mat-error>Informe o local.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Organizador *</mat-label>
+          <input matInput name="organizador" [(ngModel)]="campeonato.organizador" required maxlength="100" placeholder="Nome do responsável">
+          <mat-error>Informe o organizador.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Data de início *</mat-label>
+          <input matInput type="date" name="dataInicio" [(ngModel)]="campeonato.dataInicio" required>
+          <mat-error>Informe a data de início.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Data de término *</mat-label>
+          <input matInput type="date" name="dataFim" [(ngModel)]="campeonato.dataFim" required [min]="campeonato.dataInicio">
+          <mat-error>Informe a data de término.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Quantidade de equipes *</mat-label>
+          <input matInput type="number" name="quantidadeEquipes" [(ngModel)]="campeonato.quantidadeEquipes" required min="2" max="128">
+          <mat-error>Informe pelo menos 2 equipes.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Formato *</mat-label>
+          <mat-select name="formato" [(ngModel)]="campeonato.formato" required>
+            <mat-option value="Pontos corridos">Pontos corridos</mat-option>
+            <mat-option value="Grupos e eliminatórias">Grupos e eliminatórias</mat-option>
+            <mat-option value="Eliminatória simples">Eliminatória simples</mat-option>
+          </mat-select>
+          <mat-error>Selecione o formato.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="acoes-formulario">
+        <button mat-flat-button color="primary" type="submit">
+          {{ idEmEdicao === null ? 'Salvar campeonato' : 'Salvar alterações' }}
+        </button>
+        <button mat-button type="button" (click)="cancelarEdicao(formulario)" *ngIf="idEmEdicao !== null">Cancelar edição</button>
+        <button mat-button type="button" (click)="limparFormulario(formulario)" *ngIf="idEmEdicao === null">Limpar campos</button>
+      </div>
+      <p class="mensagem" role="status" aria-live="polite" *ngIf="mensagem">{{ mensagem }}</p>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<section class="lista-campeonatos" aria-labelledby="titulo-lista">
+  <div class="cabecalho-lista">
+    <div>
+      <p class="sobretitulo">REGISTROS</p>
+      <h2 id="titulo-lista">Campeonatos cadastrados</h2>
+    </div>
+    <span class="contador">{{ campeonatos.length }} {{ campeonatos.length === 1 ? 'campeonato' : 'campeonatos' }}</span>
+  </div>
+
+  <mat-card appearance="outlined" *ngIf="campeonatos.length === 0" class="estado-vazio">
+    <mat-card-content>
+      <h3>Nenhum campeonato cadastrado</h3>
+      <p>Quando você salvar um campeonato, ele aparecerá nesta lista.</p>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="lista-itens" *ngIf="campeonatos.length > 0">
+    <mat-card appearance="outlined" class="item-campeonato" *ngFor="let item of campeonatos">
+      <mat-card-content>
+        <div class="dados-campeonato">
+          <div class="identificacao-campeonato">
+            <span class="modalidade">{{ item.modalidade }}</span>
+            <h3>{{ item.nome }}</h3>
+            <p>{{ item.local }} · Organizado por {{ item.organizador }}</p>
+          </div>
+          <div class="detalhes-campeonato">
+            <span><strong>Período</strong>{{ item.dataInicio | date:'dd/MM/yyyy' }} até {{ item.dataFim | date:'dd/MM/yyyy' }}</span>
+            <span><strong>Equipes</strong>{{ item.quantidadeEquipes }}</span>
+            <span><strong>Formato</strong>{{ item.formato }}</span>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="acoes-item">
+          <button mat-button color="primary" type="button" (click)="editar(item)">Editar</button>
+          <button mat-button color="warn" type="button" (click)="excluir(item.id)">Excluir</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>

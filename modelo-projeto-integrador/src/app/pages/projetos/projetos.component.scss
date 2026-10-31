@@ -1,0 +1,38 @@
+.formulario-card { margin-bottom: 38px; }
+.formulario-card mat-card-content { padding: 28px !important; }
+.titulo-secao h2 { margin: 12px 0 6px; font-size: 21px; }
+.titulo-secao p { margin: 0 0 24px; color: #64748b; font-size: 13px; }
+.formulario { width: 100%; }
+.grade-formulario { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 18px; }
+.campo { width: 100%; }
+.campo-largo { grid-column: 1 / -1; }
+.acoes-formulario { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+.acoes-formulario button[mat-flat-button] { min-height: 42px; padding: 0 22px; }
+.mensagem { margin: 16px 0 0; color: #246654; font-size: 13px; font-weight: 600; }
+.lista-campeonatos { margin-top: 8px; }
+.cabecalho-lista { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.cabecalho-lista .sobretitulo { margin-bottom: 8px; }
+.cabecalho-lista h2 { margin: 0; font-size: 21px; }
+.contador { color: #64748b; font-size: 12px; white-space: nowrap; }
+.estado-vazio mat-card-content { padding: 24px !important; }
+.estado-vazio h3 { margin: 0 0 8px; font-size: 16px; }
+.estado-vazio p { margin: 0; color: #64748b; font-size: 13px; }
+.lista-itens { display: grid; gap: 14px; }
+.item-campeonato mat-card-content { padding: 22px !important; }
+.dados-campeonato { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 22px; padding-bottom: 18px; }
+.modalidade { display: inline-block; color: #245b91; background: #eaf2fb; border-radius: 5px; padding: 5px 8px; font-size: 10px; font-weight: 700; }
+.identificacao-campeonato h3 { margin: 10px 0 6px; font-size: 17px; }
+.identificacao-campeonato p { margin: 0; color: #64748b; font-size: 12px; line-height: 1.5; }
+.detalhes-campeonato { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-content: center; }
+.detalhes-campeonato span { color: #526276; font-size: 12px; }
+.detalhes-campeonato strong { display: block; margin-bottom: 4px; color: #26394e; font-size: 10px; }
+.acoes-item { display: flex; justify-content: flex-end; gap: 8px; padding-top: 8px; }
+.aviso-dados { margin-top: 16px; color: #718096; font-size: 11px; line-height: 1.5; }
+@media (max-width: 700px) {
+  .grade-formulario { grid-template-columns: 1fr; gap: 2px; }
+  .campo-largo { grid-column: auto; }
+  .formulario-card mat-card-content { padding: 20px !important; }
+  .dados-campeonato { grid-template-columns: 1fr; gap: 16px; }
+  .detalhes-campeonato { grid-template-columns: 1fr 1fr; }
+  .cabecalho-lista { align-items: start; flex-direction: column; }
+}
