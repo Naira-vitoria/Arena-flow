@@ -1,0 +1,558 @@
+
+:host {
+  display: block;
+  color: #f5f3ff;
+}
+
+.partidas-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px;
+  color: #f5f3ff;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 26px;
+
+  h1 {
+    margin: 8px 0;
+    font-size: 30px;
+    font-weight: 750;
+    letter-spacing: -1px;
+  }
+
+  p {
+    margin: 0;
+    color: #aaa4bd;
+    font-size: 14px;
+  }
+}
+
+.page-tag {
+  color: #b58aff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.header-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #7040b8;
+  border-radius: 17px;
+  background: #211632;
+  color: #c49aff;
+
+  mat-icon {
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.resumo-partidas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.resumo-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  background: #17151f;
+  border: 1px solid #30283d;
+  border-radius: 14px;
+
+  span {
+    display: block;
+    color: #aaa4bd;
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+
+  strong {
+    font-size: 24px;
+    font-weight: 750;
+  }
+}
+
+.resumo-icon {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+
+  &.agendada {
+    background: #29213b;
+    color: #bd9aff;
+  }
+
+  &.andamento {
+    background: #382b1d;
+    color: #ffc46b;
+  }
+
+  &.finalizada {
+    background: #1c352c;
+    color: #78dca9;
+  }
+}
+
+.form-section,
+.lista-section {
+  padding: 23px;
+  margin-bottom: 24px;
+  background: #17151f;
+  border: 1px solid #30283d;
+  border-radius: 16px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+
+  h2 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0;
+    color: #9690a8;
+    font-size: 13px;
+  }
+}
+
+.section-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: #292039;
+  color: #c49aff;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.campo {
+  min-width: 0;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #d8d2e5;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  input,
+  select {
+    box-sizing: border-box;
+    width: 100%;
+    height: 44px;
+    padding: 0 13px;
+    outline: none;
+    border: 1px solid #393044;
+    border-radius: 9px;
+    background: #100e16;
+    color: #f5f3ff;
+    font: inherit;
+    font-size: 13px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:focus {
+      border-color: #a66aff;
+      box-shadow: 0 0 0 3px rgba(166, 106, 255, 0.12);
+    }
+
+    &::placeholder {
+      color: #706a7c;
+    }
+
+    color-scheme: dark;
+  }
+
+  select {
+    cursor: pointer;
+  }
+}
+
+.campo-largo {
+  grid-column: span 2;
+}
+
+.placar-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  input {
+    text-align: center;
+  }
+
+  span {
+    color: #a99bbd;
+    font-weight: 700;
+  }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+
+  button {
+    min-height: 42px;
+    padding: 0 17px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 0;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+
+    mat-icon {
+      width: 18px;
+      height: 18px;
+      font-size: 18px;
+    }
+  }
+}
+
+.btn-salvar {
+  background: linear-gradient(110deg, #8745db, #a45cf5);
+  color: white;
+
+  &:hover {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+  }
+}
+
+.btn-cancelar {
+  background: #302b39;
+  color: #e5dff0;
+
+  &:hover {
+    background: #40384c;
+  }
+}
+
+.lista-heading {
+  margin-bottom: 18px;
+}
+
+.empty-state {
+  padding: 42px 15px;
+  text-align: center;
+  border: 1px dashed #40364f;
+  border-radius: 13px;
+
+  h3 {
+    margin: 13px 0 7px;
+    font-size: 16px;
+  }
+
+  p {
+    margin: 0;
+    color: #9690a8;
+    font-size: 13px;
+  }
+}
+
+.empty-icon {
+  width: 55px;
+  height: 55px;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: #292039;
+  color: #bd91ff;
+
+  mat-icon {
+    font-size: 29px;
+    width: 29px;
+    height: 29px;
+  }
+}
+
+.partidas-lista {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.partida-card {
+  min-width: 0;
+  padding: 17px;
+  border: 1px solid #393044;
+  border-radius: 13px;
+  background: #100e16;
+}
+
+.partida-topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 19px;
+
+  .campeonato-nome {
+    display: block;
+    color: #e9ddff;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  small {
+    display: block;
+    margin-top: 5px;
+    color: #91899f;
+    font-size: 11px;
+  }
+}
+
+.status {
+  flex-shrink: 0;
+  padding: 6px 9px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+
+  &.status-agendada {
+    background: #29213b;
+    color: #c6a5ff;
+  }
+
+  &.status-andamento {
+    background: #382b1d;
+    color: #ffc46b;
+  }
+
+  &.status-finalizada {
+    background: #1c352c;
+    color: #78dca9;
+  }
+}
+
+.confronto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0 18px;
+  border-bottom: 1px solid #30283d;
+}
+
+.equipe {
+  min-width: 0;
+  text-align: center;
+
+  strong {
+    display: block;
+    margin-top: 8px;
+    overflow-wrap: anywhere;
+    color: #e9e4f2;
+    font-size: 12px;
+  }
+}
+
+.equipe-avatar {
+  width: 38px;
+  height: 38px;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #292039;
+  color: #c49aff;
+}
+
+.placar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  span {
+    min-width: 22px;
+    color: #fff;
+    font-size: 23px;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  small {
+    color: #8c829d;
+    font-size: 10px;
+    font-weight: 700;
+  }
+}
+
+.partida-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 15px;
+  padding: 15px 0;
+  color: #aaa3b8;
+  font-size: 11px;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  mat-icon {
+    width: 15px;
+    height: 15px;
+    font-size: 15px;
+    color: #b68af2;
+  }
+}
+
+.partida-acoes {
+  display: flex;
+  gap: 9px;
+  padding-top: 12px;
+  border-top: 1px solid #30283d;
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 10px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+
+    mat-icon {
+      width: 15px;
+      height: 15px;
+      font-size: 15px;
+    }
+  }
+}
+
+.btn-editar {
+  color: #c49aff;
+
+  &:hover {
+    background: #292039;
+  }
+}
+
+.btn-excluir {
+  color: #ed8d9b;
+
+  &:hover {
+    background: #38232a;
+  }
+}
+
+@media (max-width: 900px) {
+  .partidas-lista {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .partidas-page {
+    padding: 16px;
+  }
+
+  .page-header {
+    h1 {
+      font-size: 25px;
+    }
+
+    p {
+      max-width: 270px;
+      line-height: 1.5;
+    }
+  }
+
+  .header-icon {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+  }
+
+  .resumo-partidas {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .resumo-card {
+    padding: 13px 15px;
+
+    strong {
+      font-size: 21px;
+    }
+  }
+
+  .form-section,
+  .lista-section {
+    padding: 17px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .campo-largo {
+    grid-column: span 1;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .confronto {
+    gap: 5px;
+  }
+
+  .placar {
+    gap: 6px;
+
+    span {
+      font-size: 20px;
+    }
+  }
+
+  .partida-info {
+    flex-direction: column;
+    gap: 9px;
+  }
+}

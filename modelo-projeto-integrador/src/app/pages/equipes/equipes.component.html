@@ -1,0 +1,260 @@
+
+<p class="caminho">Navegação / Equipes</p>
+
+<div class="cabecalho-pagina">
+  <p class="sobretitulo">CADASTRO E ORGANIZAÇÃO</p>
+
+  <h1>Equipes</h1>
+
+  <p>
+    Cadastre e organize as equipes participantes dos campeonatos.
+  </p>
+</div>
+
+<mat-card appearance="outlined" class="formulario-card">
+  <mat-card-content>
+
+    <div class="titulo-secao">
+      <div>
+        <span class="etiqueta">DADOS DA EQUIPE</span>
+
+        <h2>
+          {{ idEmEdicao === null ? 'Cadastrar equipe' : 'Editar equipe' }}
+        </h2>
+
+        <p>
+          Preencha as informações para registrar uma equipe.
+        </p>
+      </div>
+    </div>
+
+    <form
+      #formulario="ngForm"
+      (ngSubmit)="salvar(formulario)"
+      class="formulario"
+    >
+
+      <div class="grade-formulario">
+
+        <mat-form-field appearance="outline" class="campo campo-largo">
+          <mat-label>Nome da equipe *</mat-label>
+
+          <input
+            matInput
+            name="nome"
+            [(ngModel)]="equipe.nome"
+            required
+            maxlength="100"
+          >
+
+          <mat-error>Informe o nome da equipe.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Responsável *</mat-label>
+
+          <input
+            matInput
+            name="responsavel"
+            [(ngModel)]="equipe.responsavel"
+            required
+            maxlength="100"
+          >
+
+          <mat-error>Informe o responsável.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Capitão *</mat-label>
+
+          <input
+            matInput
+            name="capitao"
+            [(ngModel)]="equipe.capitao"
+            required
+            maxlength="100"
+          >
+
+          <mat-error>Informe o capitão.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Telefone para contato *</mat-label>
+
+          <input
+            matInput
+            name="telefone"
+            [(ngModel)]="equipe.telefone"
+            required
+            maxlength="20"
+          >
+
+          <mat-error>Informe o telefone.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Campeonato *</mat-label>
+
+          <input
+            matInput
+            name="campeonato"
+            [(ngModel)]="equipe.campeonato"
+            required
+            maxlength="100"
+          >
+
+          <mat-error>Informe o campeonato.</mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="acoes-formulario">
+
+        <button mat-flat-button color="primary" type="submit">
+          {{ idEmEdicao === null ? 'Cadastrar equipe' : 'Salvar alterações' }}
+        </button>
+
+        <button
+          mat-button
+          type="button"
+          *ngIf="idEmEdicao !== null"
+          (click)="cancelarEdicao(formulario)"
+        >
+          Cancelar edição
+        </button>
+
+        <button
+          mat-button
+          type="button"
+          *ngIf="idEmEdicao === null"
+          (click)="limparFormulario(formulario)"
+        >
+          Limpar campos
+        </button>
+
+      </div>
+
+      <p
+        class="mensagem"
+        role="status"
+        aria-live="polite"
+        *ngIf="mensagem"
+      >
+        {{ mensagem }}
+      </p>
+
+    </form>
+
+  </mat-card-content>
+</mat-card>
+
+<section class="lista-equipes">
+
+  <div class="cabecalho-lista">
+
+    <div>
+      <p class="sobretitulo">REGISTROS</p>
+      <h2>Equipes cadastradas</h2>
+    </div>
+
+    <span class="contador">
+      {{ equipes.length }}
+      {{ equipes.length === 1 ? 'equipe' : 'equipes' }}
+    </span>
+
+  </div>
+
+  <mat-card
+    appearance="outlined"
+    class="estado-vazio"
+    *ngIf="equipes.length === 0"
+  >
+    <mat-card-content>
+
+      <mat-icon>groups</mat-icon>
+
+      <h3>Nenhuma equipe cadastrada</h3>
+
+      <p>
+        As equipes cadastradas aparecerão aqui.
+      </p>
+
+    </mat-card-content>
+  </mat-card>
+
+  <div class="lista-itens" *ngIf="equipes.length > 0">
+
+    <mat-card
+      appearance="outlined"
+      class="item-equipe"
+      *ngFor="let item of equipes"
+    >
+
+      <mat-card-content>
+
+        <div class="dados-equipe">
+
+          <div class="identificacao-equipe">
+
+            <span class="etiqueta">EQUIPE PARTICIPANTE</span>
+
+            <h3>{{ item.nome }}</h3>
+
+            <p>{{ item.campeonato }}</p>
+
+          </div>
+
+          <div class="detalhes-equipe">
+
+            <span>
+              <strong>Responsável</strong>
+              {{ item.responsavel }}
+            </span>
+
+            <span>
+              <strong>Capitão</strong>
+              {{ item.capitao }}
+            </span>
+
+            <span>
+              <strong>Telefone</strong>
+              {{ item.telefone }}
+            </span>
+
+          </div>
+
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="acoes-item">
+
+          <button
+            mat-button
+            color="primary"
+            type="button"
+            (click)="editar(item)"
+          >
+            <mat-icon>edit</mat-icon>
+            Editar
+          </button>
+
+          <button
+            mat-button
+            color="warn"
+            type="button"
+            (click)="excluir(item.id)"
+          >
+            <mat-icon>delete</mat-icon>
+            Excluir
+          </button>
+
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+
+  </div>
+
+</section>

@@ -1,0 +1,292 @@
+
+<div class="partidas-page">
+
+  <div class="page-header">
+    <div>
+      <span class="page-tag">ARENA FLOW / COMPETIÇÕES</span>
+      <h1>Partidas</h1>
+      <p>Organize os confrontos e acompanhe os resultados dos campeonatos.</p>
+    </div>
+
+    <div class="header-icon">
+      <mat-icon>sports_soccer</mat-icon>
+    </div>
+  </div>
+
+  <div class="resumo-partidas">
+    <div class="resumo-card">
+      <div class="resumo-icon agendada">
+        <mat-icon>calendar_month</mat-icon>
+      </div>
+      <div>
+        <span>Agendadas</span>
+        <strong>{{ totalAgendadas }}</strong>
+      </div>
+    </div>
+
+    <div class="resumo-card">
+      <div class="resumo-icon andamento">
+        <mat-icon>play_circle</mat-icon>
+      </div>
+      <div>
+        <span>Em andamento</span>
+        <strong>{{ totalEmAndamento }}</strong>
+      </div>
+    </div>
+
+    <div class="resumo-card">
+      <div class="resumo-icon finalizada">
+        <mat-icon>check_circle</mat-icon>
+      </div>
+      <div>
+        <span>Finalizadas</span>
+        <strong>{{ totalFinalizadas }}</strong>
+      </div>
+    </div>
+  </div>
+
+  <section class="form-section">
+    <div class="section-heading">
+      <div>
+        <h2>{{ editando ? 'Editar partida' : 'Cadastrar partida' }}</h2>
+        <p>Preencha as informações do confronto.</p>
+      </div>
+
+      <span class="section-icon">
+        <mat-icon>sports</mat-icon>
+      </span>
+    </div>
+
+    <form (ngSubmit)="salvar()" #formPartida="ngForm">
+
+      <div class="form-grid">
+
+        <div class="campo campo-largo">
+          <label for="campeonato">Campeonato *</label>
+          <input
+            id="campeonato"
+            type="text"
+            name="campeonato"
+            [(ngModel)]="partida.campeonato"
+            placeholder="Ex.: Copa Arena Flow"
+            required>
+        </div>
+
+        <div class="campo">
+          <label for="rodada">Rodada</label>
+          <input
+            id="rodada"
+            type="text"
+            name="rodada"
+            [(ngModel)]="partida.rodada"
+            placeholder="Ex.: 1ª rodada">
+        </div>
+
+        <div class="campo">
+          <label for="equipeA">Equipe 1 *</label>
+          <input
+            id="equipeA"
+            type="text"
+            name="equipeA"
+            [(ngModel)]="partida.equipeA"
+            placeholder="Nome da equipe"
+            required>
+        </div>
+
+        <div class="campo">
+          <label for="equipeB">Equipe 2 *</label>
+          <input
+            id="equipeB"
+            type="text"
+            name="equipeB"
+            [(ngModel)]="partida.equipeB"
+            placeholder="Nome da equipe"
+            required>
+        </div>
+
+        <div class="campo">
+          <label for="data">Data *</label>
+          <input
+            id="data"
+            type="date"
+            name="data"
+            [(ngModel)]="partida.data"
+            required>
+        </div>
+
+        <div class="campo">
+          <label for="horario">Horário *</label>
+          <input
+            id="horario"
+            type="time"
+            name="horario"
+            [(ngModel)]="partida.horario"
+            required>
+        </div>
+
+        <div class="campo campo-largo">
+          <label for="local">Local da partida *</label>
+          <input
+            id="local"
+            type="text"
+            name="local"
+            [(ngModel)]="partida.local"
+            placeholder="Ex.: Ginásio Municipal"
+            required>
+        </div>
+
+        <div class="campo">
+          <label for="status">Status</label>
+          <select
+            id="status"
+            name="status"
+            [(ngModel)]="partida.status">
+            <option value="Agendada">Agendada</option>
+            <option value="Em andamento">Em andamento</option>
+            <option value="Finalizada">Finalizada</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label>Placar</label>
+          <div class="placar-input">
+            <input
+              type="number"
+              name="golsA"
+              min="0"
+              [(ngModel)]="partida.golsA"
+              placeholder="0">
+
+            <span>×</span>
+
+            <input
+              type="number"
+              name="golsB"
+              min="0"
+              [(ngModel)]="partida.golsB"
+              placeholder="0">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="button"
+          class="btn-cancelar"
+          *ngIf="editando"
+          (click)="cancelarEdicao()">
+          Cancelar
+        </button>
+
+        <button type="submit" class="btn-salvar">
+          <mat-icon>{{ editando ? 'save' : 'add' }}</mat-icon>
+          {{ editando ? 'Salvar alterações' : 'Cadastrar partida' }}
+        </button>
+      </div>
+
+    </form>
+  </section>
+
+  <section class="lista-section">
+
+    <div class="section-heading lista-heading">
+      <div>
+        <h2>Confrontos cadastrados</h2>
+        <p>{{ partidas.length }} partida(s) registrada(s)</p>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="partidas.length === 0">
+      <div class="empty-icon">
+        <mat-icon>sports_soccer</mat-icon>
+      </div>
+
+      <h3>Nenhuma partida cadastrada</h3>
+      <p>As partidas que você cadastrar aparecerão aqui.</p>
+    </div>
+
+    <div class="partidas-lista" *ngIf="partidas.length > 0">
+
+      <article class="partida-card" *ngFor="let item of partidas">
+
+        <div class="partida-topo">
+          <div>
+            <span class="campeonato-nome">{{ item.campeonato }}</span>
+            <small *ngIf="item.rodada">{{ item.rodada }}</small>
+          </div>
+
+          <span
+            class="status"
+            [ngClass]="{
+              'status-agendada': item.status === 'Agendada',
+              'status-andamento': item.status === 'Em andamento',
+              'status-finalizada': item.status === 'Finalizada'
+            }">
+            {{ item.status }}
+          </span>
+        </div>
+
+        <div class="confronto">
+          <div class="equipe">
+            <div class="equipe-avatar">
+              <mat-icon>shield</mat-icon>
+            </div>
+            <strong>{{ item.equipeA }}</strong>
+          </div>
+
+          <div class="placar">
+            <span>{{ item.golsA === null ? '-' : item.golsA }}</span>
+            <small>VS</small>
+            <span>{{ item.golsB === null ? '-' : item.golsB }}</span>
+          </div>
+
+          <div class="equipe">
+            <div class="equipe-avatar">
+              <mat-icon>shield</mat-icon>
+            </div>
+            <strong>{{ item.equipeB }}</strong>
+          </div>
+        </div>
+
+        <div class="partida-info">
+          <span>
+            <mat-icon>calendar_today</mat-icon>
+            {{ item.data | date:'dd/MM/yyyy' }}
+          </span>
+
+          <span>
+            <mat-icon>schedule</mat-icon>
+            {{ item.horario }}
+          </span>
+
+          <span>
+            <mat-icon>location_on</mat-icon>
+            {{ item.local }}
+          </span>
+        </div>
+
+        <div class="partida-acoes">
+          <button
+            type="button"
+            class="btn-editar"
+            (click)="editar(item)">
+            <mat-icon>edit</mat-icon>
+            Editar
+          </button>
+
+          <button
+            type="button"
+            class="btn-excluir"
+            (click)="excluir(item.id)">
+            <mat-icon>delete</mat-icon>
+            Excluir
+          </button>
+        </div>
+
+      </article>
+
+    </div>
+  </section>
+
+</div>

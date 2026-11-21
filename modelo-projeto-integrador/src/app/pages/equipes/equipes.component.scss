@@ -1,0 +1,301 @@
+:host {
+  display: block;
+  color: #f5f0ff;
+}
+
+.caminho {
+  margin: 0 0 24px;
+  color: #aaa0bd;
+  font-size: 12px;
+}
+
+.cabecalho-pagina {
+  margin-bottom: 28px;
+}
+
+.sobretitulo {
+  color: #b66cff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin: 0 0 10px;
+}
+
+.cabecalho-pagina h1 {
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 800;
+  margin: 0 0 10px;
+}
+
+.cabecalho-pagina > p:last-child {
+  color: #b8afc7;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.formulario-card,
+.estado-vazio,
+.item-equipe {
+  background: #17131f !important;
+  border: 1px solid #382746 !important;
+  border-radius: 14px !important;
+  color: #ffffff;
+}
+
+.formulario-card {
+  margin-bottom: 38px;
+}
+
+.formulario-card mat-card-content {
+  padding: 28px !important;
+}
+
+.titulo-secao h2 {
+  color: #ffffff;
+  font-size: 21px;
+  margin: 12px 0 7px;
+}
+
+.titulo-secao p {
+  color: #a99eb9;
+  font-size: 13px;
+  margin: 0 0 26px;
+}
+
+.etiqueta {
+  color: #b66cff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+.grade-formulario {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 18px;
+}
+
+.campo {
+  width: 100%;
+}
+
+.campo-largo {
+  grid-column: 1 / -1;
+}
+
+.acoes-formulario {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.acoes-formulario button[mat-flat-button] {
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: 8px;
+  background: linear-gradient(110deg, #a020f0, #7020c8);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.acoes-formulario button[mat-button] {
+  color: #c8a6f5;
+}
+
+.mensagem {
+  color: #c49aff;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 16px 0 0;
+}
+
+.lista-equipes {
+  margin-top: 8px;
+}
+
+.cabecalho-lista {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.cabecalho-lista .sobretitulo {
+  margin-bottom: 8px;
+}
+
+.cabecalho-lista h2 {
+  color: #ffffff;
+  font-size: 21px;
+  margin: 0;
+}
+
+.contador {
+  color: #c49aff;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.estado-vazio mat-card-content {
+  padding: 30px !important;
+  text-align: center;
+}
+
+.estado-vazio mat-icon {
+  color: #a64bff;
+  font-size: 38px;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 10px;
+}
+
+.estado-vazio h3 {
+  color: #ffffff;
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+
+.estado-vazio p {
+  color: #a99eb9;
+  font-size: 13px;
+  margin: 0;
+}
+
+.lista-itens {
+  display: grid;
+  gap: 14px;
+}
+
+.item-equipe mat-card-content {
+  padding: 22px !important;
+}
+
+.dados-equipe {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 22px;
+  padding-bottom: 20px;
+}
+
+.identificacao-equipe h3 {
+  color: #ffffff;
+  font-size: 18px;
+  margin: 10px 0 8px;
+}
+
+.identificacao-equipe p {
+  color: #b69ae0;
+  font-size: 12px;
+  margin: 0;
+}
+
+.detalhes-equipe {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  align-content: center;
+}
+
+.detalhes-equipe span {
+  color: #d4cddd;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.detalhes-equipe strong {
+  display: block;
+  color: #a99eb9;
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+
+.acoes-item {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.acoes-item button {
+  color: #c49aff;
+}
+
+.acoes-item button:last-child {
+  color: #ff8298;
+}
+
+@media (max-width: 700px) {
+  .cabecalho-pagina h1 {
+    font-size: 25px;
+  }
+
+  .formulario-card mat-card-content {
+    padding: 20px !important;
+  }
+
+  .grade-formulario {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .campo-largo {
+    grid-column: auto;
+  }
+
+  .dados-equipe {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .detalhes-equipe {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cabecalho-lista {
+    align-items: flex-start;
+  }
+
+  .item-equipe mat-card-content {
+    padding: 18px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .detalhes-equipe {
+    grid-template-columns: 1fr;
+  }
+
+  .acoes-formulario button {
+    width: 100%;
+  }
+}
+
+/* Padronização dos textos dos campos */
+.campo label {
+  color: #ffffff !important;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  color: #ffffff !important;
+  background-color: #100e16 !important;
+}
+
+/* Texto de exemplo dentro dos campos */
+.campo input::placeholder,
+.campo textarea::placeholder {
+  color: #aaa4bd !important;
+  opacity: 1;
+}
+
+/* Opções dos campos de seleção */
+.campo select option {
+  color: #ffffff;
+  background-color: #17151f;
+}

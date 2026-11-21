@@ -1,6 +1,14 @@
+
 import { Component } from '@angular/core';
+
 @Component({
-  selector: 'app-inicio', standalone: false,
-  templateUrl: './inicio.component.html'
+  selector: 'app-inicio',
+  standalone: false,
+  templateUrl: './inicio.component.html',
+  styleUrls: ['./inicio.component.scss']
 })
-export class InicioComponent {}
+export class InicioComponent {
+
+  campeonatos: any[] = [];
+
+}

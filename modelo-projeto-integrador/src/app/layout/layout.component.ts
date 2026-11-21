@@ -17,6 +17,9 @@ export class LayoutComponent {
 
   readonly telaPequena$ = inject(BreakpointObserver)
     .observe('(max-width: 767px)')
-    .pipe(map(result => result.matches), shareReplay({ bufferSize: 1, refCount: true }));
+    .pipe(
+      map(result => result.matches),
+      shareReplay({ bufferSize: 1, refCount: true })
+    );
 
 }

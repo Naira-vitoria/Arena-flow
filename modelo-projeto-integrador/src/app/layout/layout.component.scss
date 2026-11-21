@@ -1,105 +1,161 @@
-
-.estrutura {
+:host {
+  display: block;
   height: 100dvh;
 }
 
+.estrutura {
+  height: 100dvh;
+  background: #0b0912;
+}
+
 .menu-lateral {
-  width: 256px;
-  background: #24212d;
-  border: 0;
-  border-radius: 0;
+  width: 224px;
   color: #fff;
+  background: #100d19;
+  border: 0;
+  border-right: 1px solid #292033;
+  border-radius: 0;
+}
+
+.menu-lateral .mat-drawer-inner-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
 
 .marca {
+  height: 190px;
+  min-height: 190px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 30px 20px 38px;
+  justify-content: center;
+  padding: 15px;
 }
 
-.marca-simbolo {
-  background: #8055d9;
+.logo-trofeu {
+  width: 62px;
+  height: 62px;
+  font-size: 62px;
+  color: #922cff;
+  filter: drop-shadow(0 0 12px #8b25ff);
+}
+
+.marca h2 {
+  margin: 8px 0 3px;
   color: #fff;
-  border-radius: 12px;
-  padding: 12px 9px;
+  font-size: 25px;
   font-weight: 800;
+  letter-spacing: -1px;
 }
 
-.marca strong {
-  font-size: 15px;
-  display: block;
+.marca h2 span {
+  color: #a33dff;
 }
 
 .marca small {
-  display: block;
-  color: #c5bfd2;
-  margin-top: 5px;
-  font-size: 12px;
-}
-
-.rotulo-menu {
-  padding: 0 24px 12px;
-  font-size: 10px;
-  letter-spacing: 1.8px;
-  color: #aaa2b9;
-}
-
-mat-nav-list {
-  padding: 0 12px;
-}
-
-a[mat-list-item] {
-  margin-bottom: 8px;
-  border-radius: 8px;
-  --mat-list-list-item-label-text-color: #ddd8e8;
-  --mat-list-list-item-hover-label-text-color: #fff;
-  --mat-list-list-item-focus-label-text-color: #fff;
-}
-
-a.item-ativo {
-  background: #393044;
-  border-left: 3px solid #a47bea;
-}
-
-.numero-menu {
-  margin-right: 14px;
+  color: #b7a9c9;
   font-size: 11px;
-  opacity: .7;
 }
 
-.rodape-menu {
-  margin: 46px 24px 24px;
-  padding-top: 20px;
-  border-top: 1px solid #494253;
-  font-size: 12px;
-  line-height: 1.8;
+.navegacao {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 12px;
 }
 
-.rodape-menu span {
-  color: #bcb4ca;
+.navegacao a[mat-list-item],
+.item-menu-desativado {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0 13px;
+  border-radius: 10px;
+  color: #ded6e9;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.navegacao a[mat-list-item] mat-icon,
+.item-menu-desativado mat-icon {
+  color: #cbb8df;
+}
+
+.navegacao a.item-ativo {
+  background: linear-gradient(110deg, #8528e8, #4d197f);
+  color: #fff;
+  box-shadow: 0 0 20px #8529e833;
+}
+
+.navegacao a.item-ativo mat-icon {
+  color: #fff;
+}
+
+.item-menu-desativado {
+  color: #c5b9d2;
+}
+
+.menu-rodape {
+  min-height: 0;
+  flex: 1;
+  margin-top: auto;
+  padding: 0 12px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: center;
+  background:
+    linear-gradient(to top, #100d19 5%, transparent 90%),
+    url('/assets/arena-flow-sidebar.png') center 35% / contain no-repeat;
+}
+
+.jogador-imagem {
+  display: none;
+}
+
+.menu-rodape strong {
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 7px;
+}
+
+.menu-rodape span {
+  color: #b7a9c9;
   font-size: 11px;
+  line-height: 1.6;
 }
 
 .area-principal {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  background: #f5f4f8;
+  overflow: hidden;
+  background: #0b0912;
+  color: #fff;
 }
 
 .topo {
-  flex-shrink: 0;
-  background: #fff;
-  border-bottom: 1px solid #e8e4ee;
-  height: 76px;
-  gap: 12px;
-  padding: 0 28px;
-  color: #292536;
+  height: 84px;
+  min-height: 84px;
+  padding: 0 30px;
+  gap: 18px;
+  color: #fff;
+  background: #100d19;
+  border-bottom: 1px solid #30213f;
 }
 
-.titulo-topo {
-  font-size: 16px;
-  font-weight: 600;
+.topo button {
+  color: #fff;
+}
+
+.nome-topo {
+  color: #fff;
+  font-size: 19px;
+  font-weight: 700;
 }
 
 .espacador {
@@ -109,88 +165,89 @@ a.item-ativo {
 .usuario {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
 }
 
 .avatar {
-  background: #eee8fa;
-  color: #6840bd;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
-  font-size: 12px;
+  border-radius: 50%;
+  background: #7130c0;
+  color: #fff;
+  font-weight: 700;
 }
 
-.usuario-texto strong,
-.usuario-texto small {
+.usuario-info strong,
+.usuario-info small {
   display: block;
-  line-height: 1.5;
 }
 
-.usuario-texto strong {
-  font-size: 12px;
+.usuario-info strong {
+  color: #fff;
+  font-size: 13px;
 }
 
-.usuario-texto small {
-  font-size: 10px;
-  color: #777184;
-  font-weight: 400;
+.usuario-info small {
+  margin-top: 4px;
+  color: #b5a8c5;
+  font-size: 11px;
+}
+
+.seta-usuario {
+  color: #cbb8df;
 }
 
 .conteudo {
   flex: 1;
+  min-height: 0;
   width: 100%;
-  max-width: 1200px;
-  box-sizing: border-box;
-  padding: 44px 40px;
-  margin: 0 auto;
-}
-
-.rodape {
-  padding: 18px 40px;
-  border-top: 1px solid #e8e4ee;
-  font-size: 11px;
-  color: #777184;
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
+  padding: 0;
+  overflow: auto;
 }
 
 .pular-conteudo {
   position: fixed;
-  left: 12px;
   top: -100px;
+  left: 10px;
   z-index: 1000;
-  background: white;
   padding: 12px;
+  color: #111;
+  background: #fff;
 }
 
 .pular-conteudo:focus {
-  top: 12px;
+  top: 10px;
 }
 
 @media (max-width: 767px) {
-  .topo {
-    padding: 0 12px;
-    height: 68px;
+  .menu-lateral {
+    width: 260px;
   }
 
-  .usuario-texto {
+  .topo {
+    height: 66px;
+    min-height: 66px;
+    padding: 0 12px;
+    gap: 10px;
+  }
+
+  .nome-topo {
+    font-size: 16px;
+  }
+
+  .usuario-info,
+  .seta-usuario {
     display: none;
   }
 
-  .titulo-topo {
-    font-size: 14px;
+  .avatar {
+    width: 36px;
+    height: 36px;
   }
 
   .conteudo {
-    padding: 28px 20px;
-  }
-
-  .rodape {
-    padding: 18px 20px;
-    flex-wrap: wrap;
+    overflow-y: auto;
   }
 }
