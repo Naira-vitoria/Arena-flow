@@ -34,67 +34,52 @@
 
   </section>
 
-  <!-- ATALHOS -->
-  <section class="atalhos">
+  <!-- DASHBOARD: INDICADORES -->
+  <section class="dashboard-indicadores">
 
-    <a class="atalho" routerLink="/projetos">
-      <div class="atalho-icone">
+    <!-- CAMPEONATOS -->
+    <div class="indicador-card">
+
+      <div class="indicador-icone indicador-campeonatos">
         <mat-icon>emoji_events</mat-icon>
       </div>
 
-      <div class="atalho-texto">
-        <h2>Campeonatos</h2>
-        <p>Gerencie suas competições</p>
+      <div class="indicador-info">
+        <span>Total de campeonatos</span>
+        <h2>{{ totalCampeonatos }}</h2>
+        <p>Campeonatos cadastrados</p>
       </div>
 
-      <span class="atalho-seta">
-        <mat-icon>arrow_forward</mat-icon>
-      </span>
-    </a>
+    </div>
 
-    <a class="atalho" routerLink="/equipes">
-      <div class="atalho-icone">
+    <!-- EQUIPES -->
+    <div class="indicador-card">
+
+      <div class="indicador-icone indicador-equipes">
         <mat-icon>groups</mat-icon>
       </div>
 
-      <div class="atalho-texto">
-        <h2>Equipes</h2>
-        <p>Organize os participantes</p>
+      <div class="indicador-info">
+        <span>Total de equipes</span>
+        <h2>{{ totalEquipes }}</h2>
+        <p>Equipes cadastradas</p>
       </div>
 
-      <span class="atalho-seta">
-        <mat-icon>arrow_forward</mat-icon>
-      </span>
-    </a>
-
-    <div class="atalho atalho-indisponivel">
-      <div class="atalho-icone">
-        <mat-icon>calendar_month</mat-icon>
-      </div>
-
-      <div class="atalho-texto">
-        <h2>Partidas</h2>
-        <p>Configure os jogos</p>
-      </div>
-
-      <span class="atalho-seta">
-        <mat-icon>arrow_forward</mat-icon>
-      </span>
     </div>
 
-    <div class="atalho atalho-indisponivel">
-      <div class="atalho-icone">
-        <mat-icon>bar_chart</mat-icon>
+    <!-- PARTIDAS FINALIZADAS -->
+    <div class="indicador-card">
+
+      <div class="indicador-icone indicador-partidas">
+        <mat-icon>sports_soccer</mat-icon>
       </div>
 
-      <div class="atalho-texto">
-        <h2>Resultados</h2>
-        <p>Acompanhe a classificação</p>
+      <div class="indicador-info">
+        <span>Partidas finalizadas</span>
+        <h2>{{ totalPartidasFinalizadas }}</h2>
+        <p>Jogos concluídos</p>
       </div>
 
-      <span class="atalho-seta">
-        <mat-icon>arrow_forward</mat-icon>
-      </span>
     </div>
 
   </section>
@@ -102,6 +87,7 @@
   <!-- PAINÉIS INFERIORES -->
   <section class="painéis">
 
+    <!-- CAMPEONATOS EM DESTAQUE -->
     <div class="painel painel-campeonatos">
 
       <div class="painel-cabecalho">
@@ -114,17 +100,23 @@
       </div>
 
       <div *ngIf="campeonatos.length === 0" class="estado-vazio">
+
         <mat-icon>emoji_events</mat-icon>
 
         <div>
           <strong>Nenhum campeonato cadastrado</strong>
           <p>Cadastre um campeonato para ele aparecer aqui.</p>
         </div>
+
       </div>
 
-      <div *ngIf="campeonatos.length > 0" class="lista-campeonatos">
+      <div
+        *ngIf="campeonatos.length > 0"
+        class="lista-campeonatos">
 
-        <div class="campeonato" *ngFor="let campeonato of campeonatos.slice(0, 1)">
+        <div
+          class="campeonato"
+          *ngFor="let campeonato of campeonatos.slice(0, 1)">
 
           <div class="campeonato-imagem">
             <mat-icon>sports_soccer</mat-icon>
@@ -136,7 +128,9 @@
             <p>Campeonato cadastrado no Arena Flow</p>
           </div>
 
-          <mat-icon class="campeonato-seta">arrow_forward</mat-icon>
+          <mat-icon class="campeonato-seta">
+            arrow_forward
+          </mat-icon>
 
         </div>
 
@@ -144,43 +138,32 @@
 
     </div>
 
+    <!-- PRÓXIMAS PARTIDAS -->
     <div class="painel painel-partidas">
 
       <div class="painel-cabecalho">
         <h2>Próximas partidas</h2>
-        <span class="texto-roxo">Ver todas <mat-icon>arrow_forward</mat-icon></span>
+
+        <a routerLink="/partidas" class="texto-roxo">
+          Ver todas
+          <mat-icon>arrow_forward</mat-icon>
+        </a>
       </div>
 
       <div class="estado-vazio">
+
         <mat-icon>calendar_month</mat-icon>
 
         <div>
           <strong>Nenhuma partida agendada</strong>
           <p>As partidas cadastradas aparecerão aqui.</p>
         </div>
+
       </div>
 
     </div>
 
   </section>
 
-  <!-- FAIXA FINAL -->
-  <section class="faixa-final">
-
-    <div class="faixa-icone">
-      <mat-icon>leaderboard</mat-icon>
-    </div>
-
-    <div class="faixa-texto">
-      <h2>Arena Flow</h2>
-      <p>Mais organização, mais emoção no esporte!</p>
-    </div>
-
-    <a mat-stroked-button routerLink="/projetos">
-      Comece agora
-      <mat-icon>arrow_forward</mat-icon>
-    </a>
-
-  </section>
 
 </div>

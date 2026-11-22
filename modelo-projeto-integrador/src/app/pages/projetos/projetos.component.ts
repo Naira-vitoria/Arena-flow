@@ -20,15 +20,47 @@ interface Campeonato {
   styleUrls: ['./projetos.component.scss']
 })
 export class ProjetosComponent {
+
   campeonatos: Campeonato[] = [];
-  proximoId = 1;
+
+  campeonato: Campeonato = this.novoCampeonato();
+
   idEmEdicao: number | null = null;
+
+  proximoId = 1;
+
   mensagem = '';
 
-  campeonato: Omit<Campeonato, 'id'> = this.novoCampeonato();
+  constructor() {
+    this.carregarCampeonatos();
+  }
 
-  private novoCampeonato(): Omit<Campeonato, 'id'> {
+  // Carrega os campeonatos salvos no navegador
+  carregarCampeonatos(): void {
+    const dados = localStorage.getItem('arena-flow-campeonatos');
+
+    if (dados) {
+      this.campeonatos = JSON.parse(dados);
+
+      if (this.campeonatos.length > 0) {
+        this.proximoId =
+          Math.max(...this.campeonatos.map(item => item.id)) + 1;
+      }
+    }
+  }
+
+  // Salva os campeonatos no localStorage
+  salvarStorage(): void {
+    localStorage.setItem(
+      'arena-flow-campeonatos',
+      JSON.stringify(this.campeonatos)
+    );
+  }
+
+  // Cria um campeonato vazio
+  novoCampeonato(): Campeonato {
     return {
+      id: 0,
       nome: '',
       modalidade: '',
       local: '',
@@ -40,63 +72,101 @@ export class ProjetosComponent {
     };
   }
 
+  // Salva um novo campeonato ou as alterações de um existente
   salvar(formulario: NgForm): void {
+
     if (formulario.invalid) {
       formulario.control.markAllAsTouched();
-      this.mensagem = 'Confira os campos obrigatórios antes de salvar.';
+      return;
+    }
+
+    if (this.campeonato.dataFim < this.campeonato.dataInicio) {
+      this.mensagem = 'A data de término não pode ser anterior à data de início.';
       return;
     }
 
     if (this.idEmEdicao !== null) {
-      this.campeonatos = this.campeonatos.map(item =>
-        item.id === this.idEmEdicao
-          ? { ...this.campeonato, id: item.id }
-          : item
+
+      const indice = this.campeonatos.findIndex(
+        item => item.id === this.idEmEdicao
       );
-      this.mensagem = 'Campeonato atualizado com sucesso!';
+
+      if (indice !== -1) {
+        this.campeonatos[indice] = {
+          ...this.campeonato,
+          id: this.idEmEdicao
+        };
+
+        this.mensagem = 'Campeonato atualizado com sucesso!';
+      }
+
     } else {
-      this.campeonatos = [
-        ...this.campeonatos,
-        { ...this.campeonato, id: this.proximoId++ }
-      ];
+
+      this.campeonato.id = this.proximoId++;
+
+      this.campeonatos.push({
+        ...this.campeonato
+      });
+
       this.mensagem = 'Campeonato cadastrado com sucesso!';
     }
 
-    this.limparFormulario(formulario);
-  }
+    this.salvarStorage();
 
-  editar(item: Campeonato): void {
-    this.idEmEdicao = item.id;
-    this.campeonato = {
-      nome: item.nome,
-      modalidade: item.modalidade,
-      local: item.local,
-      organizador: item.organizador,
-      dataInicio: item.dataInicio,
-      dataFim: item.dataFim,
-      quantidadeEquipes: item.quantidadeEquipes,
-      formato: item.formato
-    };
-    this.mensagem = 'Editando campeonato. Altere os campos e salve.';
-  }
+    formulario.resetForm();
 
-  excluir(id: number): void {
-    this.campeonatos = this.campeonatos.filter(item => item.id !== id);
-    if (this.idEmEdicao === id) {
-      this.idEmEdicao = null;
-      this.campeonato = this.novoCampeonato();
-    }
-    this.mensagem = 'Campeonato removido da lista.';
-  }
-
-  cancelarEdicao(formulario: NgForm): void {
-    this.limparFormulario(formulario);
-    this.mensagem = 'Edição cancelada.';
-  }
-
-  limparFormulario(formulario: NgForm): void {
-    this.idEmEdicao = null;
     this.campeonato = this.novoCampeonato();
-    formulario.resetForm({ ...this.campeonato });
+    this.idEmEdicao = null;
+  }
+
+  // Prepara um campeonato para edição
+  editar(item: Campeonato): void {
+    this.campeonato = { ...item };
+    this.idEmEdicao = item.id;
+    this.mensagem = '';
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  // Cancela a edição
+  cancelarEdicao(formulario: NgForm): void {
+    formulario.resetForm();
+
+    this.campeonato = this.novoCampeonato();
+    this.idEmEdicao = null;
+    this.mensagem = '';
+  }
+
+  // Limpa os campos do formulário
+  limparFormulario(formulario: NgForm): void {
+    formulario.resetForm();
+
+    this.campeonato = this.novoCampeonato();
+    this.mensagem = '';
+  }
+
+  // Exclui um campeonato
+  excluir(id: number): void {
+    const confirmar = confirm(
+      'Deseja realmente excluir este campeonato?'
+    );
+
+    if (confirmar) {
+      this.campeonatos = this.campeonatos.filter(
+        item => item.id !== id
+      );
+
+      this.salvarStorage();
+
+      this.mensagem = 'Campeonato excluído com sucesso!';
+
+      if (this.idEmEdicao === id) {
+        this.campeonato = this.novoCampeonato();
+        this.idEmEdicao = null;
+      }
+    }
   }
 }

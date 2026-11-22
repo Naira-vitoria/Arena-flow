@@ -1,4 +1,3 @@
-
 <p class="caminho">Navegação / Equipes</p>
 
 <div class="cabecalho-pagina">
@@ -92,18 +91,24 @@
           <mat-error>Informe o telefone.</mat-error>
         </mat-form-field>
 
+        <!-- CAMPEONATO COM SELEÇÃO -->
         <mat-form-field appearance="outline" class="campo">
           <mat-label>Campeonato *</mat-label>
 
-          <input
-            matInput
+          <mat-select
             name="campeonato"
             [(ngModel)]="equipe.campeonato"
-            required
-            maxlength="100"
-          >
+            required>
 
-          <mat-error>Informe o campeonato.</mat-error>
+            <mat-option
+              *ngFor="let campeonato of campeonatos"
+              [value]="campeonato.nome">
+              {{ campeonato.nome }}
+            </mat-option>
+
+          </mat-select>
+
+          <mat-error>Selecione um campeonato.</mat-error>
         </mat-form-field>
 
       </div>

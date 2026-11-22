@@ -1,0 +1,182 @@
+<div class="classificacao-page">
+
+  <!-- Cabeçalho -->
+  <header class="page-header">
+    <div>
+      <span class="page-tag">ARENA FLOW / COMPETIÇÕES</span>
+      <h1>Classificação</h1>
+      <p>Acompanhe o desempenho das equipes nos campeonatos.</p>
+    </div>
+
+    <div class="header-icon">
+      <span>🏆</span>
+    </div>
+  </header>
+
+  <!-- Seleção do campeonato -->
+  <section class="selecao-campeonato">
+    <div class="selecao-info">
+      <span class="etiqueta">CAMPEONATO</span>
+      <h2>Consultar classificação</h2>
+      <p>Selecione um campeonato para visualizar a tabela.</p>
+    </div>
+
+    <div class="campo-campeonato">
+      <label for="campeonato">Campeonato</label>
+
+      <select
+        id="campeonato"
+        [(ngModel)]="campeonatoSelecionado">
+
+        <option value="">Selecione um campeonato</option>
+
+        <option
+          *ngFor="let campeonato of campeonatos"
+          [value]="campeonato.nome">
+          {{ campeonato.nome }}
+        </option>
+
+      </select>
+    </div>
+  </section>
+
+  <!-- Conteúdo quando existe campeonato selecionado -->
+  <ng-container *ngIf="campeonatoSelecionado">
+
+    <!-- Indicadores -->
+    <section class="resumo-classificacao">
+
+      <div class="resumo-card">
+        <div class="resumo-icone">⚽</div>
+        <div>
+          <span>Jogos finalizados</span>
+          <strong>{{ totalJogosFinalizados }}</strong>
+        </div>
+      </div>
+
+      <div class="resumo-card">
+        <div class="resumo-icone">📅</div>
+        <div>
+          <span>Jogos pendentes</span>
+          <strong>{{ totalJogosPendentes }}</strong>
+        </div>
+      </div>
+
+      <div class="resumo-card">
+        <div class="resumo-icone">👥</div>
+        <div>
+          <span>Equipes no campeonato</span>
+          <strong>{{ equipesDoCampeonato.length }}</strong>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Tabela de classificação -->
+    <section class="tabela-container">
+
+      <div class="tabela-header">
+        <div>
+          <span class="etiqueta">TABELA DE PONTUAÇÃO</span>
+          <h2>Classificação geral</h2>
+          <p>As equipes são ordenadas de acordo com seus resultados.</p>
+        </div>
+
+        <span class="badge-campeonato">
+          {{ campeonatoSelecionado }}
+        </span>
+      </div>
+
+      <!-- Quando existem equipes -->
+      <div class="tabela-scroll" *ngIf="tabelaClassificacao.length > 0">
+
+        <table class="tabela-classificacao">
+
+          <thead>
+            <tr>
+              <th class="col-pos">POS</th>
+              <th class="col-equipe">EQUIPE</th>
+              <th title="Partidas jogadas">PJ</th>
+              <th title="Vitórias">V</th>
+              <th title="Empates">E</th>
+              <th title="Derrotas">D</th>
+              <th title="Gols pró">GP</th>
+              <th title="Gols contra">GC</th>
+              <th title="Saldo de gols">SG</th>
+              <th class="col-pontos" title="Pontos">PTS</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr
+              *ngFor="let equipe of tabelaClassificacao; let i = index"
+              [class.primeiro-lugar]="i === 0"
+              [class.segundo-lugar]="i === 1"
+              [class.terceiro-lugar]="i === 2">
+
+              <td class="posicao">
+                <span class="posicao-numero">{{ i + 1 }}</span>
+                <span class="medalha" *ngIf="i === 0">🥇</span>
+                <span class="medalha" *ngIf="i === 1">🥈</span>
+                <span class="medalha" *ngIf="i === 2">🥉</span>
+              </td>
+
+              <td class="nome-equipe">
+                {{ equipe.nome }}
+              </td>
+
+              <td>{{ equipe.partidas }}</td>
+              <td>{{ equipe.vitorias }}</td>
+              <td>{{ equipe.empates }}</td>
+              <td>{{ equipe.derrotas }}</td>
+              <td>{{ equipe.golsPro }}</td>
+              <td>{{ equipe.golsContra }}</td>
+
+              <td>
+                <span
+                  class="saldo"
+                  [class.saldo-positivo]="equipe.saldoGols > 0"
+                  [class.saldo-negativo]="equipe.saldoGols < 0">
+                  {{ equipe.saldoGols > 0 ? '+' : '' }}{{ equipe.saldoGols }}
+                </span>
+              </td>
+
+              <td class="pontos">
+                {{ equipe.pontos }}
+              </td>
+
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <!-- Quando não existem equipes cadastradas -->
+      <div class="estado-vazio" *ngIf="tabelaClassificacao.length === 0">
+        <div class="vazio-icone">👥</div>
+        <h3>Nenhuma equipe cadastrada</h3>
+        <p>Cadastre equipes vinculadas a este campeonato para visualizar a classificação.</p>
+      </div>
+
+    </section>
+
+    <!-- Aviso quando ainda não existem resultados -->
+    <div class="aviso-resultados" *ngIf="tabelaClassificacao.length > 0 && totalJogosFinalizados === 0">
+      <span class="aviso-icone">ℹ️</span>
+      <div>
+        <strong>A classificação ainda não possui resultados.</strong>
+        <p>Quando partidas forem finalizadas e seus placares registrados, os pontos e estatísticas serão calculados automaticamente.</p>
+      </div>
+    </div>
+
+  </ng-container>
+
+  <!-- Estado inicial sem campeonato selecionado -->
+  <section class="estado-inicial" *ngIf="!campeonatoSelecionado">
+    <div class="estado-inicial-icone">🏆</div>
+    <h2>Selecione um campeonato</h2>
+    <p>Escolha um campeonato acima para visualizar a classificação das equipes.</p>
+  </section>
+
+</div>

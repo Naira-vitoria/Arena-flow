@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -25,9 +24,21 @@ const routes: Routes = [
   },
 
   {
+    path: 'atletas',
+    loadChildren: () => import('./pages/atletas/atletas.module').then(m => m.AtletasModule),
+    data: { titulo: 'Atletas' }
+  },
+
+  {
     path: 'partidas',
     loadChildren: () => import('./partidas/partidas.module').then(m => m.PartidasModule),
     data: { titulo: 'Partidas' }
+  },
+
+  {
+    path: 'classificacao',
+    loadChildren: () => import('./pages/classificacao/classificacao.module').then(m => m.ClassificacaoModule),
+    data: { titulo: 'Classificação' }
   },
 
   { path: '**', redirectTo: 'inicio' }

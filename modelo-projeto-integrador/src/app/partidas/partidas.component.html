@@ -13,7 +13,10 @@
     </div>
   </div>
 
+  <!-- RESUMO DAS PARTIDAS -->
+
   <div class="resumo-partidas">
+
     <div class="resumo-card">
       <div class="resumo-icon agendada">
         <mat-icon>calendar_month</mat-icon>
@@ -43,9 +46,13 @@
         <strong>{{ totalFinalizadas }}</strong>
       </div>
     </div>
+
   </div>
 
+  <!-- FORMULÁRIO -->
+
   <section class="form-section">
+
     <div class="section-heading">
       <div>
         <h2>{{ editando ? 'Editar partida' : 'Cadastrar partida' }}</h2>
@@ -61,19 +68,39 @@
 
       <div class="form-grid">
 
+        <!-- CAMPEONATO -->
+
         <div class="campo campo-largo">
           <label for="campeonato">Campeonato *</label>
-          <input
+
+          <select
             id="campeonato"
-            type="text"
             name="campeonato"
             [(ngModel)]="partida.campeonato"
-            placeholder="Ex.: Copa Arena Flow"
             required>
+
+            <option value="" disabled>
+              Selecione um campeonato
+            </option>
+
+            <option
+              *ngFor="let campeonato of campeonatos"
+              [value]="campeonato.nome">
+              {{ campeonato.nome }}
+            </option>
+
+          </select>
+
+          <small *ngIf="campeonatos.length === 0" class="aviso-cadastro">
+            Nenhum campeonato cadastrado. Cadastre um campeonato primeiro.
+          </small>
         </div>
+
+        <!-- RODADA -->
 
         <div class="campo">
           <label for="rodada">Rodada</label>
+
           <input
             id="rodada"
             type="text"
@@ -82,30 +109,65 @@
             placeholder="Ex.: 1ª rodada">
         </div>
 
+        <!-- EQUIPE 1 -->
+
         <div class="campo">
           <label for="equipeA">Equipe 1 *</label>
-          <input
+
+          <select
             id="equipeA"
-            type="text"
             name="equipeA"
             [(ngModel)]="partida.equipeA"
-            placeholder="Nome da equipe"
             required>
+
+            <option value="" disabled>
+              Selecione a equipe
+            </option>
+
+            <option
+              *ngFor="let equipe of equipes"
+              [value]="equipe.nome"
+              [disabled]="equipe.nome === partida.equipeB">
+              {{ equipe.nome }}
+            </option>
+
+          </select>
+
+          <small *ngIf="equipes.length === 0" class="aviso-cadastro">
+            Nenhuma equipe cadastrada. Cadastre equipes primeiro.
+          </small>
         </div>
+
+        <!-- EQUIPE 2 -->
 
         <div class="campo">
           <label for="equipeB">Equipe 2 *</label>
-          <input
+
+          <select
             id="equipeB"
-            type="text"
             name="equipeB"
             [(ngModel)]="partida.equipeB"
-            placeholder="Nome da equipe"
             required>
+
+            <option value="" disabled>
+              Selecione a equipe
+            </option>
+
+            <option
+              *ngFor="let equipe of equipes"
+              [value]="equipe.nome"
+              [disabled]="equipe.nome === partida.equipeA">
+              {{ equipe.nome }}
+            </option>
+
+          </select>
         </div>
+
+        <!-- DATA -->
 
         <div class="campo">
           <label for="data">Data *</label>
+
           <input
             id="data"
             type="date"
@@ -114,8 +176,11 @@
             required>
         </div>
 
+        <!-- HORÁRIO -->
+
         <div class="campo">
           <label for="horario">Horário *</label>
+
           <input
             id="horario"
             type="time"
@@ -124,8 +189,11 @@
             required>
         </div>
 
+        <!-- LOCAL -->
+
         <div class="campo campo-largo">
           <label for="local">Local da partida *</label>
+
           <input
             id="local"
             type="text"
@@ -135,21 +203,30 @@
             required>
         </div>
 
+        <!-- STATUS -->
+
         <div class="campo">
           <label for="status">Status</label>
+
           <select
             id="status"
             name="status"
             [(ngModel)]="partida.status">
+
             <option value="Agendada">Agendada</option>
             <option value="Em andamento">Em andamento</option>
             <option value="Finalizada">Finalizada</option>
+
           </select>
         </div>
 
+        <!-- PLACAR -->
+
         <div class="campo">
           <label>Placar</label>
+
           <div class="placar-input">
+
             <input
               type="number"
               name="golsA"
@@ -165,12 +242,16 @@
               min="0"
               [(ngModel)]="partida.golsB"
               placeholder="0">
+
           </div>
         </div>
 
       </div>
 
+      <!-- BOTÕES -->
+
       <div class="form-actions">
+
         <button
           type="button"
           class="btn-cancelar"
@@ -183,10 +264,14 @@
           <mat-icon>{{ editando ? 'save' : 'add' }}</mat-icon>
           {{ editando ? 'Salvar alterações' : 'Cadastrar partida' }}
         </button>
+
       </div>
 
     </form>
+
   </section>
+
+  <!-- LISTA DE PARTIDAS -->
 
   <section class="lista-section">
 
@@ -197,14 +282,20 @@
       </div>
     </div>
 
+    <!-- ESTADO VAZIO -->
+
     <div class="empty-state" *ngIf="partidas.length === 0">
+
       <div class="empty-icon">
         <mat-icon>sports_soccer</mat-icon>
       </div>
 
       <h3>Nenhuma partida cadastrada</h3>
       <p>As partidas que você cadastrar aparecerão aqui.</p>
+
     </div>
+
+    <!-- PARTIDAS -->
 
     <div class="partidas-lista" *ngIf="partidas.length > 0">
 
@@ -227,7 +318,10 @@
           </span>
         </div>
 
+        <!-- CONFRONTO -->
+
         <div class="confronto">
+
           <div class="equipe">
             <div class="equipe-avatar">
               <mat-icon>shield</mat-icon>
@@ -247,9 +341,13 @@
             </div>
             <strong>{{ item.equipeB }}</strong>
           </div>
+
         </div>
 
+        <!-- INFORMAÇÕES -->
+
         <div class="partida-info">
+
           <span>
             <mat-icon>calendar_today</mat-icon>
             {{ item.data | date:'dd/MM/yyyy' }}
@@ -264,9 +362,13 @@
             <mat-icon>location_on</mat-icon>
             {{ item.local }}
           </span>
+
         </div>
 
+        <!-- AÇÕES -->
+
         <div class="partida-acoes">
+
           <button
             type="button"
             class="btn-editar"
@@ -282,11 +384,13 @@
             <mat-icon>delete</mat-icon>
             Excluir
           </button>
+
         </div>
 
       </article>
 
     </div>
+
   </section>
 
 </div>

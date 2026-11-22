@@ -17,6 +17,7 @@
     </div>
 
     <nav class="navegacao">
+
       <a mat-list-item
          routerLink="/inicio"
          routerLinkActive="item-ativo"
@@ -43,13 +44,30 @@
       </a>
 
       <a mat-list-item
+         routerLink="/atletas"
+         routerLinkActive="item-ativo"
+         (click)="menu.mode === 'over' && menu.close()">
+        <mat-icon>sports_soccer</mat-icon>
+        <span>Atletas</span>
+      </a>
+
+      <a mat-list-item
          routerLink="/partidas"
-         routerLinkActive="active">
+         routerLinkActive="item-ativo"
+         (click)="menu.mode === 'over' && menu.close()">
         <mat-icon>sports_soccer</mat-icon>
         <span>Partidas</span>
       </a>
 
-    
+      <!-- CLASSIFICAÇÃO -->
+      <a mat-list-item
+         routerLink="/classificacao"
+         routerLinkActive="item-ativo"
+         (click)="menu.mode === 'over' && menu.close()">
+        <mat-icon>leaderboard</mat-icon>
+        <span>Classificação</span>
+      </a>
+
     </nav>
 
   </mat-sidenav>
@@ -88,4 +106,5 @@
     </main>
 
   </mat-sidenav-content>
+
 </mat-sidenav-container>

@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 
+interface Campeonato {
+  id: number;
+  nome: string;
+}
+
 interface Equipe {
   id: number;
   nome: string;
@@ -18,12 +23,48 @@ interface Equipe {
 export class EquipesComponent {
 
   equipes: Equipe[] = [];
+  campeonatos: Campeonato[] = [];
 
   idEmEdicao: number | null = null;
-
   mensagem = '';
 
   equipe: Equipe = this.novaEquipe();
+
+  constructor() {
+    this.carregarCampeonatos();
+    this.carregarEquipes();
+  }
+
+  // Carrega os campeonatos cadastrados
+  carregarCampeonatos(): void {
+    const dados = localStorage.getItem('arena-flow-campeonatos');
+
+    if (dados) {
+      const lista = JSON.parse(dados);
+
+      this.campeonatos = lista.map((item: any) => ({
+        id: item.id,
+        nome: item.nome || item.name || ''
+      }));
+    }
+  }
+
+  // Carrega as equipes salvas
+  carregarEquipes(): void {
+    const dados = localStorage.getItem('arena-flow-equipes');
+
+    if (dados) {
+      this.equipes = JSON.parse(dados);
+    }
+  }
+
+  // Salva as equipes no navegador
+  salvarEquipesStorage(): void {
+    localStorage.setItem(
+      'arena-flow-equipes',
+      JSON.stringify(this.equipes)
+    );
+  }
 
   novaEquipe(): Equipe {
     return {
@@ -65,6 +106,7 @@ export class EquipesComponent {
       this.mensagem = 'Equipe atualizada com sucesso!';
     }
 
+    this.salvarEquipesStorage();
     this.limparFormulario(formulario);
   }
 
@@ -72,6 +114,7 @@ export class EquipesComponent {
     this.equipe = { ...item };
     this.idEmEdicao = item.id;
     this.mensagem = '';
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -85,6 +128,8 @@ export class EquipesComponent {
     }
 
     this.equipes = this.equipes.filter(item => item.id !== id);
+    this.salvarEquipesStorage();
+
     this.mensagem = 'Equipe excluída com sucesso!';
 
     if (this.idEmEdicao === id) {

@@ -1,0 +1,426 @@
+.pagina-atletas {
+  padding: 24px;
+  color: #f1f0f7;
+}
+
+.caminho {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #aaa6bb;
+  font-size: 13px;
+  margin-bottom: 24px;
+
+  strong {
+    color: #f1f0f7;
+  }
+
+  .separador {
+    color: #625c75;
+  }
+}
+
+/* Cabeçalho */
+
+.cabecalho-pagina {
+  margin-bottom: 28px;
+}
+
+.titulo-pagina {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  .icone-titulo {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #29223f;
+    border: 1px solid #51416f;
+    border-radius: 14px;
+    font-size: 25px;
+  }
+
+  .sobretitulo {
+    color: #a78bfa;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+
+  h1 {
+    margin: 5px 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #f1f0f7;
+  }
+
+  p {
+    margin: 0;
+    color: #aaa6bb;
+    font-size: 14px;
+  }
+}
+
+/* Formulário */
+
+.formulario-card {
+  background: #191624;
+  border-color: #302b40;
+  border-radius: 16px;
+  margin-bottom: 32px;
+}
+
+.titulo-secao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  .etiqueta {
+    color: #a78bfa;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+  }
+
+  h2 {
+    margin: 8px 0;
+    font-size: 21px;
+    color: #f1f0f7;
+  }
+
+  p {
+    margin: 0;
+    color: #aaa6bb;
+    font-size: 13px;
+  }
+
+  .icone-card {
+    color: #a78bfa;
+    font-size: 22px;
+  }
+}
+
+.formulario {
+  width: 100%;
+}
+
+.grade-formulario {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.campo {
+  width: 100%;
+}
+
+.campo-largo {
+  grid-column: span 2;
+}
+
+/* CORREÇÃO DA VISIBILIDADE DOS CAMPOS ANGULAR MATERIAL */
+
+:host ::ng-deep .mat-mdc-form-field {
+  width: 100%;
+}
+
+/* Texto digitado */
+
+:host ::ng-deep .mat-mdc-input-element {
+  color: #ffffff !important;
+  caret-color: #b68aff !important;
+}
+
+/* Rótulos dos campos */
+
+:host ::ng-deep .mat-mdc-form-field .mdc-floating-label {
+  color: #c5bddb !important;
+}
+
+/* Rótulo quando o campo está selecionado */
+
+:host ::ng-deep .mat-mdc-form-field.mat-focused .mdc-floating-label {
+  color: #b68aff !important;
+}
+
+/* Texto dos seletores */
+
+:host ::ng-deep .mat-mdc-select-value,
+:host ::ng-deep .mat-mdc-select-value-text,
+:host ::ng-deep .mat-mdc-select-min-line {
+  color: #ffffff !important;
+}
+
+/* Seta dos seletores */
+
+:host ::ng-deep .mat-mdc-select-arrow {
+  color: #c5bddb !important;
+}
+
+/* Bordas dos campos */
+
+:host ::ng-deep .mdc-notched-outline__leading,
+:host ::ng-deep .mdc-notched-outline__notch,
+:host ::ng-deep .mdc-notched-outline__trailing {
+  border-color: #625879 !important;
+}
+
+/* Borda quando o campo está selecionado */
+
+:host ::ng-deep .mat-mdc-form-field.mat-focused
+.mdc-notched-outline__leading,
+:host ::ng-deep .mat-mdc-form-field.mat-focused
+.mdc-notched-outline__notch,
+:host ::ng-deep .mat-mdc-form-field.mat-focused
+.mdc-notched-outline__trailing {
+  border-color: #a78bfa !important;
+}
+
+/* Fundo dos campos */
+
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+  background-color: #171420 !important;
+}
+
+/* Mensagens de erro */
+
+:host ::ng-deep .mat-mdc-form-field-error {
+  color: #ff8b98 !important;
+}
+
+/* Lista de opções dos seletores */
+
+:host ::ng-deep .mat-mdc-select-panel {
+  background: #201b2d !important;
+}
+
+:host ::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
+  color: #f1f0f7 !important;
+}
+
+:host ::ng-deep .mat-mdc-option:hover {
+  background: #342746 !important;
+}
+
+:host ::ng-deep .mat-mdc-option.mat-mdc-option-active {
+  background: #38294f !important;
+}
+
+:host ::ng-deep .mat-mdc-option.mat-mdc-option-selected {
+  background: #442c66 !important;
+}
+
+/* Botões */
+
+.acoes-formulario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.botao-salvar {
+  min-height: 42px;
+  border-radius: 9px;
+  font-weight: 600;
+}
+
+.botao-secundario {
+  color: #c5bddb !important;
+}
+
+.mensagem {
+  margin-top: 16px;
+  color: #b9a2ff;
+  font-size: 13px;
+}
+
+/* Lista */
+
+.lista-atletas {
+  margin-top: 10px;
+}
+
+.cabecalho-lista {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+
+  .etiqueta {
+    color: #a78bfa;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+  }
+
+  h2 {
+    color: #f1f0f7;
+    font-size: 21px;
+    margin: 8px 0;
+  }
+
+  p {
+    color: #aaa6bb;
+    font-size: 13px;
+    margin: 0;
+  }
+}
+
+.contador {
+  background: #29223f;
+  color: #c4b5fd;
+  border: 1px solid #51416f;
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* Estado vazio */
+
+.estado-vazio {
+  background: #191624;
+  border-color: #302b40;
+  border-radius: 14px;
+  text-align: center;
+  padding: 24px;
+
+  .icone-vazio {
+    font-size: 36px;
+  }
+
+  h3 {
+    color: #f1f0f7;
+    margin: 12px 0 8px;
+  }
+
+  p {
+    color: #aaa6bb;
+    margin: 0;
+  }
+}
+
+/* Cards de atletas */
+
+.lista-itens {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.item-atleta {
+  background: #191624;
+  border-color: #302b40;
+  border-radius: 14px;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: #67518f;
+  }
+}
+
+.dados-atleta {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 16px;
+}
+
+.identificacao-atleta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  .numero-camisa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    background: #29223f;
+    border: 1px solid #51416f;
+    border-radius: 12px;
+    color: #c4b5fd;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  h3 {
+    color: #f1f0f7;
+    margin: 0 0 5px;
+    font-size: 17px;
+  }
+
+  p {
+    color: #aaa6bb;
+    margin: 0;
+    font-size: 13px;
+  }
+}
+
+.detalhes-atleta {
+  span {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #d7d2e5;
+    font-size: 13px;
+  }
+
+  strong {
+    color: #a78bfa;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+}
+
+.acoes-item {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 10px;
+
+  .botao-editar {
+    color: #c4b5fd !important;
+  }
+
+  .botao-excluir {
+    color: #f28b91 !important;
+  }
+}
+
+/* Responsividade */
+
+@media (max-width: 900px) {
+  .lista-itens {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .pagina-atletas {
+    padding: 16px;
+  }
+
+  .grade-formulario {
+    grid-template-columns: 1fr;
+  }
+
+  .campo-largo {
+    grid-column: span 1;
+  }
+
+  .cabecalho-lista {
+    align-items: flex-start;
+  }
+
+  .titulo-pagina h1 {
+    font-size: 24px;
+  }
+}

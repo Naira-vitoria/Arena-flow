@@ -1,0 +1,216 @@
+<div class="pagina-atletas">
+
+  <div class="caminho">
+    <span>Navegação</span>
+    <span class="separador">/</span>
+    <strong>Atletas</strong>
+  </div>
+
+  <header class="cabecalho-pagina">
+    <div class="titulo-pagina">
+      <span class="icone-titulo">⚽</span>
+      <div>
+        <span class="sobretitulo">GESTÃO ESPORTIVA</span>
+        <h1>Atletas</h1>
+        <p>Cadastre e organize os atletas das suas equipes.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Formulário -->
+  <mat-card appearance="outlined" class="formulario-card">
+    <mat-card-content>
+
+      <div class="titulo-secao">
+        <div>
+          <span class="etiqueta">CADASTRO DE ATLETAS</span>
+          <h2>{{ idEmEdicao === null ? 'Novo atleta' : 'Editar atleta' }}</h2>
+          <p>Preencha os dados do atleta.</p>
+        </div>
+        <span class="icone-card">✦</span>
+      </div>
+
+      <form #formulario="ngForm"
+            (ngSubmit)="salvar(formulario)"
+            class="formulario">
+
+        <div class="grade-formulario">
+
+          <mat-form-field appearance="outline" class="campo campo-largo">
+            <mat-label>Nome do atleta *</mat-label>
+            <input matInput
+                   name="nome"
+                   [(ngModel)]="atleta.nome"
+                   required
+                   maxlength="100"
+                   placeholder="Nome completo do atleta">
+            <mat-error>Informe o nome do atleta.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="campo">
+            <mat-label>Número da camisa *</mat-label>
+            <input matInput
+                   type="number"
+                   name="numero"
+                   [(ngModel)]="atleta.numero"
+                   required
+                   min="1"
+                   max="99">
+            <mat-error>Informe um número entre 1 e 99.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="campo">
+            <mat-label>Posição *</mat-label>
+            <mat-select name="posicao"
+                        [(ngModel)]="atleta.posicao"
+                        required>
+              <mat-option value="Goleiro">Goleiro</mat-option>
+              <mat-option value="Defensor">Defensor</mat-option>
+              <mat-option value="Meio-campo">Meio-campo</mat-option>
+              <mat-option value="Atacante">Atacante</mat-option>
+              <mat-option value="Outra">Outra</mat-option>
+            </mat-select>
+            <mat-error>Selecione a posição.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="campo campo-largo">
+            <mat-label>Equipe *</mat-label>
+            <mat-select name="equipeId"
+                        [(ngModel)]="atleta.equipeId"
+                        required>
+              <mat-option [value]="0" disabled>
+                Selecione uma equipe
+              </mat-option>
+
+              <mat-option *ngFor="let item of equipes"
+                          [value]="item.id">
+                {{ item.nome }}
+              </mat-option>
+            </mat-select>
+            <mat-error>Selecione uma equipe.</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <div class="acoes-formulario">
+
+          <button mat-flat-button
+                  color="primary"
+                  type="submit"
+                  class="botao-salvar">
+            {{ idEmEdicao === null ? 'Cadastrar atleta' : 'Salvar alterações' }}
+          </button>
+
+          <button mat-button
+                  type="button"
+                  class="botao-secundario"
+                  (click)="cancelarEdicao(formulario)"
+                  *ngIf="idEmEdicao !== null">
+            Cancelar edição
+          </button>
+
+          <button mat-button
+                  type="button"
+                  class="botao-secundario"
+                  (click)="limparFormulario(formulario)"
+                  *ngIf="idEmEdicao === null">
+            Limpar campos
+          </button>
+
+        </div>
+
+        <p class="mensagem"
+           role="status"
+           aria-live="polite"
+           *ngIf="mensagem">
+          {{ mensagem }}
+        </p>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Lista de atletas -->
+  <section class="lista-atletas" aria-labelledby="titulo-lista">
+
+    <div class="cabecalho-lista">
+      <div>
+        <span class="etiqueta">ELENCO</span>
+        <h2 id="titulo-lista">Atletas cadastrados</h2>
+        <p>Confira os atletas registrados no sistema.</p>
+      </div>
+
+      <span class="contador">
+        {{ atletas.length }}
+        {{ atletas.length === 1 ? 'atleta' : 'atletas' }}
+      </span>
+    </div>
+
+    <!-- Lista vazia -->
+    <mat-card appearance="outlined"
+               *ngIf="atletas.length === 0"
+               class="estado-vazio">
+      <mat-card-content>
+        <span class="icone-vazio">⚽</span>
+        <h3>Nenhum atleta cadastrado</h3>
+        <p>Os atletas cadastrados aparecerão aqui.</p>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Atletas cadastrados -->
+    <div class="lista-itens" *ngIf="atletas.length > 0">
+
+      <mat-card appearance="outlined"
+                 class="item-atleta"
+                 *ngFor="let item of atletas">
+
+        <mat-card-content>
+
+          <div class="dados-atleta">
+
+            <div class="identificacao-atleta">
+              <span class="numero-camisa">#{{ item.numero }}</span>
+
+              <div>
+                <h3>{{ item.nome }}</h3>
+                <p>{{ item.posicao }}</p>
+              </div>
+            </div>
+
+            <div class="detalhes-atleta">
+              <span>
+                <strong>EQUIPE</strong>
+                {{ item.equipeNome }}
+              </span>
+            </div>
+
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <div class="acoes-item">
+
+            <button mat-button
+                    type="button"
+                    class="botao-editar"
+                    (click)="editar(item)">
+              Editar
+            </button>
+
+            <button mat-button
+                    type="button"
+                    class="botao-excluir"
+                    (click)="excluir(item.id)">
+              Excluir
+            </button>
+
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+
+  </section>
+
+</div>
